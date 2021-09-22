@@ -1,37 +1,90 @@
-## Welcome to GitHub Pages
+# SpaceEngineers-Scripting
+SpaceEngineers scripting tips and snippets.
 
-You can use the [editor on GitHub](https://github.com/xMoonGames/SpaceEngineers-Scripting/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Space engineers uses C# with custom namespaces.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+API wiki at [spaceengineerswiki](https://www.spaceengineerswiki.com/Scripting_API_Documentation)
 
-### Markdown
+Good repository with tutorials at [MDK-SE](https://github.com/malware-dev/MDK-SE/wiki/Quick-Introduction-to-Space-Engineers-Ingame-Scripts)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+---
 
-```markdown
-Syntax highlighted code block
+## Snippets
 
-# Header 1
-## Header 2
-### Header 3
+### Get a block in grid by its name (in example its an LCD called 'LCD'):
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```C#
+var lcd = GridTerminalSystem.GetBlockWithName("LCD") as IMyTextPanel;
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### Get all blocks in grid with same name (in example gets all blocks with name 'LCD'):
 
-### Jekyll Themes
+```C#
+List<IMyTerminalBlock> lcds = new List<IMyTerminalBlock>();  
+GridTerminalSystem.SearchBlocksOfName("LCD", lcds);
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/xMoonGames/SpaceEngineers-Scripting/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+### Get all blocks in grid of a particular type (in example batteries):
 
-### Support or Contact
+```C#
+List<IMyTerminalBlock> batteries = new List<IMyTerminalBlock>();  
+GridTerminalSystem.GetBlocksOfType<IMyBatteryBlock>(batteries);
+```
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+---
+
+## Functions that can help your scripting
+
+### Get block detailed info by the info name:
+
+```C#
+string getDetailedInfoValue(IMyTerminalBlock block, string name)    
+{   
+    string value = "";   
+    string[] lines = block.DetailedInfo.Split(new string[] { "\r\n", "\n", "\r" }, StringSplitOptions.None);   
+    for (int i = 0; i < lines.Length; i++)    
+    {   
+        string[] line = lines[i].Split(':');   
+        if (line[0].Equals(name))    
+        {   
+            value = line[1].Substring(1);   
+            break;   
+        }   
+    }   
+    return value;   
+}  
+```
+
+### Convert power string to int:
+
+```C#
+int getPowerAsInt(string text)    
+{   
+    if (String.IsNullOrWhiteSpace(text))    
+    {   
+        return 0;   
+    }   
+    string[] values = text.Split(' ');   
+    if (values[1].Equals("kW"))    
+    {   
+        return (int) (float.Parse(values[0])*1000f);   
+    }   
+    else if (values[1].Equals("kWh"))    
+    {    
+        return (int) (float.Parse(values[0])*1000f);    
+    }   
+    else if (values[1].Equals("MW"))    
+    {   
+        return (int) (float.Parse(values[0])*1000000f);   
+    }   
+    else if (values[1].Equals("MWh"))    
+    {    
+        return (int) (float.Parse(values[0])*1000000f);    
+    }   
+    else    
+    {   
+        return (int) float.Parse(values[0]);   
+    }   
+    return 0;   
+}
+```
