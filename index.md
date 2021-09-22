@@ -9,6 +9,23 @@ Good repository with tutorials at [MDK-SE](https://github.com/malware-dev/MDK-SE
 
 ---
 
+## Default clean script that will re-run every 100 server ticks
+
+```c#
+public Program()
+{
+    Runtime.UpdateFrequency = UpdateFrequency.Update100;
+}
+
+public void Save()
+{
+}
+
+public void Main(string argument)
+{
+}
+```
+
 ## Snippets
 
 ### Get a block in grid by its name (in example its an LCD called 'LCD'):
