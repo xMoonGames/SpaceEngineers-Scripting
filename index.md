@@ -21,7 +21,7 @@ public void Save()
 {
 }
 
-public void Main(string argument)
+public void Main(string argument, UpdateType updateSource)
 {
 }
 ```
