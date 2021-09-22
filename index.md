@@ -13,20 +13,20 @@ Good repository with tutorials at [MDK-SE](https://github.com/malware-dev/MDK-SE
 
 ### Get a block in grid by its name (in example its an LCD called 'LCD'):
 
-```C#
+```c#
 var lcd = GridTerminalSystem.GetBlockWithName("LCD") as IMyTextPanel;
 ```
 
 ### Get all blocks in grid with same name (in example gets all blocks with name 'LCD'):
 
-```C#
+```c#
 List<IMyTerminalBlock> lcds = new List<IMyTerminalBlock>();  
 GridTerminalSystem.SearchBlocksOfName("LCD", lcds);
 ```
 
 ### Get all blocks in grid of a particular type (in example batteries):
 
-```C#
+```c#
 List<IMyTerminalBlock> batteries = new List<IMyTerminalBlock>();  
 GridTerminalSystem.GetBlocksOfType<IMyBatteryBlock>(batteries);
 ```
@@ -37,7 +37,7 @@ GridTerminalSystem.GetBlocksOfType<IMyBatteryBlock>(batteries);
 
 ### Get block detailed info by the info name:
 
-```C#
+```c#
 string getDetailedInfoValue(IMyTerminalBlock block, string name)    
 {   
     string value = "";   
@@ -57,7 +57,7 @@ string getDetailedInfoValue(IMyTerminalBlock block, string name)
 
 ### Convert power string to int:
 
-```C#
+```c#
 int getPowerAsInt(string text)    
 {   
     if (String.IsNullOrWhiteSpace(text))    
