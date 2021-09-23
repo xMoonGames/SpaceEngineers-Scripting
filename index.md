@@ -1,5 +1,5 @@
 # SpaceEngineers-Scripting
-SpaceEngineers scripting tips and snippets.
+tips and snippets.
 
 Space engineers uses C# with custom namespaces.
 
