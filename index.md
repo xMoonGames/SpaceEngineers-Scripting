@@ -1,7 +1,7 @@
 # SpaceEngineers-Scripting
-tips and snippets.
+Tips and Snippets.
 
-Space engineers uses C# with custom namespaces.
+Space Engineers uses C# with custom namespaces.
 
 API wiki at [spaceengineerswiki](https://www.spaceengineerswiki.com/Scripting_API_Documentation)
 
@@ -46,6 +46,17 @@ GridTerminalSystem.SearchBlocksOfName("LCD", lcds);
 ```c#
 List<IMyTerminalBlock> batteries = new List<IMyTerminalBlock>();  
 GridTerminalSystem.GetBlocksOfType<IMyBatteryBlock>(batteries);
+```
+### Get all blocks in a group (in example batteries):
+
+```c#
+IMyBlockGroup group = GridTerminalSystem.GetBlockGroupWithName("Ship Batteries");
+List<IMyTerminalBlock> blocks = new List<IMyTerminalBlock>();
+group.GetBlocks(blocks);
+foreach (var block in blocks)
+{
+    Echo(block.CustomName);
+}
 ```
 
 ---
